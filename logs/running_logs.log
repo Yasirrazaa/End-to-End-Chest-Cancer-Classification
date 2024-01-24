@@ -101,3 +101,273 @@ FileNotFoundError: [Errno 2] No such file or directory: 'artifacts/data_ingestio
 [2024-01-23 22:47:06,754: INFO: common: created directory at: artifacts]
 [2024-01-23 22:47:06,755: INFO: common: created directory at: artifacts/data_ingestion]
 [2024-01-23 22:47:06,755: INFO: data_ingestion: Downloading data from https://drive.google.com/file/d/1yUHgRFtd-_PSuv_4NaCFqnPfGrx0jAke/view?usp=drive_link into file artifacts/data_ingestion/data.zip]
+[2024-01-24 12:01:17,444: INFO: main: >>>>>> stage Data Ingestion stage started <<<<<<]
+[2024-01-24 12:01:17,450: INFO: common: yaml file: config/config.yaml loaded successfully]
+[2024-01-24 12:01:17,455: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-01-24 12:01:17,456: INFO: common: created directory at: artifacts]
+[2024-01-24 12:01:17,456: INFO: common: created directory at: artifacts/data_ingestion]
+[2024-01-24 12:01:17,457: INFO: data_ingestion: Downloading data from https://drive.google.com/file/d/1yUHgRFtd-_PSuv_4NaCFqnPfGrx0jAke/view?usp=drive_link into file artifacts/data_ingestion/data.zip]
+[2024-01-24 12:03:07,372: INFO: data_ingestion: Downloaded data from https://drive.google.com/file/d/1yUHgRFtd-_PSuv_4NaCFqnPfGrx0jAke/view?usp=drive_link into file artifacts/data_ingestion/data.zip]
+[2024-01-24 12:03:10,721: INFO: main: >>>>>> stage Data Ingestion stage completed <<<<<<
+
+x==========x]
+[2024-01-24 12:03:10,721: INFO: main: *******************]
+[2024-01-24 12:03:10,722: INFO: main: >>>>>> stage Prepare base model started <<<<<<]
+[2024-01-24 12:03:10,726: INFO: common: yaml file: config/config.yaml loaded successfully]
+[2024-01-24 12:03:10,729: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-01-24 12:03:10,730: INFO: common: created directory at: artifacts]
+[2024-01-24 12:03:10,730: INFO: common: created directory at: artifacts/prepare_base_model]
+[2024-01-24 12:03:12,221: WARNING: saving_utils: Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.]
+[2024-01-24 12:03:13,073: INFO: main: >>>>>> stage Prepare base model completed <<<<<<
+
+x==========x]
+[2024-01-24 12:03:13,073: INFO: main: *******************]
+[2024-01-24 12:03:13,073: INFO: main: >>>>>> stage Training started <<<<<<]
+[2024-01-24 12:03:13,077: INFO: common: yaml file: config/config.yaml loaded successfully]
+[2024-01-24 12:03:13,080: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-01-24 12:03:13,081: INFO: common: created directory at: artifacts]
+[2024-01-24 12:03:13,082: INFO: common: created directory at: artifacts/training]
+[2024-01-24 12:03:23,989: ERROR: main: Graph execution error:
+
+Detected at node 'categorical_crossentropy/softmax_cross_entropy_with_logits' defined at (most recent call last):
+    File "/home/yasir/Projects/Chest Cancer Classification/main.py", line 38, in <module>
+      model_trainer.main()
+    File "/home/yasir/Projects/Chest Cancer Classification/src/cnnClassifier/pipeline/stage_03_model_training.py", line 21, in main
+      training.train()
+    File "/home/yasir/Projects/Chest Cancer Classification/src/cnnClassifier/components/model_training.py", line 75, in train
+      self.model.fit(
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/utils/traceback_utils.py", line 65, in error_handler
+      return fn(*args, **kwargs)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/engine/training.py", line 1742, in fit
+      tmp_logs = self.train_function(iterator)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/engine/training.py", line 1338, in train_function
+      return step_function(self, iterator)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/engine/training.py", line 1322, in step_function
+      outputs = model.distribute_strategy.run(run_step, args=(data,))
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/engine/training.py", line 1303, in run_step
+      outputs = model.train_step(data)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/engine/training.py", line 1081, in train_step
+      loss = self.compute_loss(x, y, y_pred, sample_weight)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/engine/training.py", line 1139, in compute_loss
+      return self.compiled_loss(
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/engine/compile_utils.py", line 265, in __call__
+      loss_value = loss_obj(y_t, y_p, sample_weight=sw)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/losses.py", line 142, in __call__
+      losses = call_fn(y_true, y_pred)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/losses.py", line 268, in call
+      return ag_fn(y_true, y_pred, **self._fn_kwargs)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/losses.py", line 2122, in categorical_crossentropy
+      return backend.categorical_crossentropy(
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/backend.py", line 5566, in categorical_crossentropy
+      return tf.nn.softmax_cross_entropy_with_logits(
+Node: 'categorical_crossentropy/softmax_cross_entropy_with_logits'
+logits and labels must be broadcastable: logits_size=[16,4] labels_size=[16,3]
+	 [[{{node categorical_crossentropy/softmax_cross_entropy_with_logits}}]] [Op:__inference_train_function_1464]]
+Traceback (most recent call last):
+  File "/home/yasir/Projects/Chest Cancer Classification/main.py", line 38, in <module>
+    model_trainer.main()
+  File "/home/yasir/Projects/Chest Cancer Classification/src/cnnClassifier/pipeline/stage_03_model_training.py", line 21, in main
+    training.train()
+  File "/home/yasir/Projects/Chest Cancer Classification/src/cnnClassifier/components/model_training.py", line 75, in train
+    self.model.fit(
+  File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/utils/traceback_utils.py", line 70, in error_handler
+    raise e.with_traceback(filtered_tb) from None
+  File "/home/yasir/miniconda3/lib/python3.11/site-packages/tensorflow/python/eager/execute.py", line 59, in quick_execute
+    except TypeError as e:
+tensorflow.python.framework.errors_impl.InvalidArgumentError: Graph execution error:
+
+Detected at node 'categorical_crossentropy/softmax_cross_entropy_with_logits' defined at (most recent call last):
+    File "/home/yasir/Projects/Chest Cancer Classification/main.py", line 38, in <module>
+      model_trainer.main()
+    File "/home/yasir/Projects/Chest Cancer Classification/src/cnnClassifier/pipeline/stage_03_model_training.py", line 21, in main
+      training.train()
+    File "/home/yasir/Projects/Chest Cancer Classification/src/cnnClassifier/components/model_training.py", line 75, in train
+      self.model.fit(
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/utils/traceback_utils.py", line 65, in error_handler
+      return fn(*args, **kwargs)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/engine/training.py", line 1742, in fit
+      tmp_logs = self.train_function(iterator)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/engine/training.py", line 1338, in train_function
+      return step_function(self, iterator)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/engine/training.py", line 1322, in step_function
+      outputs = model.distribute_strategy.run(run_step, args=(data,))
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/engine/training.py", line 1303, in run_step
+      outputs = model.train_step(data)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/engine/training.py", line 1081, in train_step
+      loss = self.compute_loss(x, y, y_pred, sample_weight)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/engine/training.py", line 1139, in compute_loss
+      return self.compiled_loss(
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/engine/compile_utils.py", line 265, in __call__
+      loss_value = loss_obj(y_t, y_p, sample_weight=sw)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/losses.py", line 142, in __call__
+      losses = call_fn(y_true, y_pred)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/losses.py", line 268, in call
+      return ag_fn(y_true, y_pred, **self._fn_kwargs)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/losses.py", line 2122, in categorical_crossentropy
+      return backend.categorical_crossentropy(
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/backend.py", line 5566, in categorical_crossentropy
+      return tf.nn.softmax_cross_entropy_with_logits(
+Node: 'categorical_crossentropy/softmax_cross_entropy_with_logits'
+logits and labels must be broadcastable: logits_size=[16,4] labels_size=[16,3]
+	 [[{{node categorical_crossentropy/softmax_cross_entropy_with_logits}}]] [Op:__inference_train_function_1464]
+[2024-01-24 12:49:13,611: INFO: main: >>>>>> stage Data Ingestion stage started <<<<<<]
+[2024-01-24 12:49:13,615: INFO: common: yaml file: config/config.yaml loaded successfully]
+[2024-01-24 12:49:13,618: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-01-24 12:49:13,619: INFO: common: created directory at: artifacts]
+[2024-01-24 12:49:13,619: INFO: common: created directory at: artifacts/data_ingestion]
+[2024-01-24 12:49:13,620: INFO: data_ingestion: Downloading data from https://drive.google.com/file/d/1yUHgRFtd-_PSuv_4NaCFqnPfGrx0jAke/view?usp=drive_link into file artifacts/data_ingestion/data.zip]
+[2024-01-24 12:51:20,818: INFO: data_ingestion: Downloaded data from https://drive.google.com/file/d/1yUHgRFtd-_PSuv_4NaCFqnPfGrx0jAke/view?usp=drive_link into file artifacts/data_ingestion/data.zip]
+[2024-01-24 12:51:24,674: INFO: main: >>>>>> stage Data Ingestion stage completed <<<<<<
+
+x==========x]
+[2024-01-24 12:51:24,674: INFO: main: *******************]
+[2024-01-24 12:51:24,674: INFO: main: >>>>>> stage Prepare base model started <<<<<<]
+[2024-01-24 12:51:24,678: INFO: common: yaml file: config/config.yaml loaded successfully]
+[2024-01-24 12:51:24,681: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-01-24 12:51:24,682: INFO: common: created directory at: artifacts]
+[2024-01-24 12:51:24,682: INFO: common: created directory at: artifacts/prepare_base_model]
+[2024-01-24 12:51:26,036: WARNING: saving_utils: Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.]
+[2024-01-24 12:51:26,955: INFO: main: >>>>>> stage Prepare base model completed <<<<<<
+
+x==========x]
+[2024-01-24 12:51:26,955: INFO: main: *******************]
+[2024-01-24 12:51:26,956: INFO: main: >>>>>> stage Training started <<<<<<]
+[2024-01-24 12:51:26,960: INFO: common: yaml file: config/config.yaml loaded successfully]
+[2024-01-24 12:51:26,963: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-01-24 12:51:26,964: INFO: common: created directory at: artifacts]
+[2024-01-24 12:51:26,964: INFO: common: created directory at: artifacts/training]
+[2024-01-24 12:56:22,230: INFO: main: >>>>>> stage Training completed <<<<<<
+
+x==========x]
+[2024-01-24 12:56:22,230: INFO: main: *******************]
+[2024-01-24 12:56:22,230: INFO: main: >>>>>> stage Evaluation stage started <<<<<<]
+[2024-01-24 12:56:22,234: INFO: common: yaml file: config/config.yaml loaded successfully]
+[2024-01-24 12:56:22,237: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-01-24 12:56:22,238: INFO: common: created directory at: artifacts]
+[2024-01-24 12:56:31,125: ERROR: main: Graph execution error:
+
+Detected at node 'categorical_crossentropy/softmax_cross_entropy_with_logits' defined at (most recent call last):
+    File "/home/yasir/Projects/Chest Cancer Classification/main.py", line 50, in <module>
+      model_evalution.main()
+    File "/home/yasir/Projects/Chest Cancer Classification/src/cnnClassifier/pipeline/stage_04_model_evaluation.py", line 18, in main
+      evaluation.evaluation()
+    File "/home/yasir/Projects/Chest Cancer Classification/src/cnnClassifier/components/model_evaluation.py", line 48, in evaluation
+      self.score = self.model.evaluate(self.valid_generator)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/utils/traceback_utils.py", line 65, in error_handler
+      return fn(*args, **kwargs)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/engine/training.py", line 2200, in evaluate
+      logs = test_function_runner.run_step(
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/engine/training.py", line 4000, in run_step
+      tmp_logs = self._function(dataset_or_iterator)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/engine/training.py", line 1972, in test_function
+      return step_function(self, iterator)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/engine/training.py", line 1956, in step_function
+      outputs = model.distribute_strategy.run(run_step, args=(data,))
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/engine/training.py", line 1944, in run_step
+      outputs = model.test_step(data)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/engine/training.py", line 1852, in test_step
+      self.compute_loss(x, y, y_pred, sample_weight)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/engine/training.py", line 1139, in compute_loss
+      return self.compiled_loss(
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/engine/compile_utils.py", line 265, in __call__
+      loss_value = loss_obj(y_t, y_p, sample_weight=sw)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/losses.py", line 142, in __call__
+      losses = call_fn(y_true, y_pred)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/losses.py", line 268, in call
+      return ag_fn(y_true, y_pred, **self._fn_kwargs)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/losses.py", line 2122, in categorical_crossentropy
+      return backend.categorical_crossentropy(
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/backend.py", line 5566, in categorical_crossentropy
+      return tf.nn.softmax_cross_entropy_with_logits(
+Node: 'categorical_crossentropy/softmax_cross_entropy_with_logits'
+logits and labels must be broadcastable: logits_size=[16,4] labels_size=[16,3]
+	 [[{{node categorical_crossentropy/softmax_cross_entropy_with_logits}}]] [Op:__inference_test_function_2694]]
+Traceback (most recent call last):
+  File "/home/yasir/Projects/Chest Cancer Classification/main.py", line 50, in <module>
+    model_evalution.main()
+  File "/home/yasir/Projects/Chest Cancer Classification/src/cnnClassifier/pipeline/stage_04_model_evaluation.py", line 18, in main
+    evaluation.evaluation()
+  File "/home/yasir/Projects/Chest Cancer Classification/src/cnnClassifier/components/model_evaluation.py", line 48, in evaluation
+    self.score = self.model.evaluate(self.valid_generator)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/utils/traceback_utils.py", line 70, in error_handler
+    raise e.with_traceback(filtered_tb) from None
+  File "/home/yasir/miniconda3/lib/python3.11/site-packages/tensorflow/python/eager/execute.py", line 59, in quick_execute
+    except TypeError as e:
+tensorflow.python.framework.errors_impl.InvalidArgumentError: Graph execution error:
+
+Detected at node 'categorical_crossentropy/softmax_cross_entropy_with_logits' defined at (most recent call last):
+    File "/home/yasir/Projects/Chest Cancer Classification/main.py", line 50, in <module>
+      model_evalution.main()
+    File "/home/yasir/Projects/Chest Cancer Classification/src/cnnClassifier/pipeline/stage_04_model_evaluation.py", line 18, in main
+      evaluation.evaluation()
+    File "/home/yasir/Projects/Chest Cancer Classification/src/cnnClassifier/components/model_evaluation.py", line 48, in evaluation
+      self.score = self.model.evaluate(self.valid_generator)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/utils/traceback_utils.py", line 65, in error_handler
+      return fn(*args, **kwargs)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/engine/training.py", line 2200, in evaluate
+      logs = test_function_runner.run_step(
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/engine/training.py", line 4000, in run_step
+      tmp_logs = self._function(dataset_or_iterator)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/engine/training.py", line 1972, in test_function
+      return step_function(self, iterator)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/engine/training.py", line 1956, in step_function
+      outputs = model.distribute_strategy.run(run_step, args=(data,))
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/engine/training.py", line 1944, in run_step
+      outputs = model.test_step(data)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/engine/training.py", line 1852, in test_step
+      self.compute_loss(x, y, y_pred, sample_weight)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/engine/training.py", line 1139, in compute_loss
+      return self.compiled_loss(
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/engine/compile_utils.py", line 265, in __call__
+      loss_value = loss_obj(y_t, y_p, sample_weight=sw)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/losses.py", line 142, in __call__
+      losses = call_fn(y_true, y_pred)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/losses.py", line 268, in call
+      return ag_fn(y_true, y_pred, **self._fn_kwargs)
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/losses.py", line 2122, in categorical_crossentropy
+      return backend.categorical_crossentropy(
+    File "/home/yasir/miniconda3/lib/python3.11/site-packages/keras/src/backend.py", line 5566, in categorical_crossentropy
+      return tf.nn.softmax_cross_entropy_with_logits(
+Node: 'categorical_crossentropy/softmax_cross_entropy_with_logits'
+logits and labels must be broadcastable: logits_size=[16,4] labels_size=[16,3]
+	 [[{{node categorical_crossentropy/softmax_cross_entropy_with_logits}}]] [Op:__inference_test_function_2694]
+[2024-01-24 16:00:34,273: INFO: main: >>>>>> stage Data Ingestion stage started <<<<<<]
+[2024-01-24 16:00:34,280: INFO: common: yaml file: config/config.yaml loaded successfully]
+[2024-01-24 16:00:34,285: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-01-24 16:00:34,286: INFO: common: created directory at: artifacts]
+[2024-01-24 16:00:34,286: INFO: common: created directory at: artifacts/data_ingestion]
+[2024-01-24 16:00:34,286: INFO: data_ingestion: Downloading data from https://drive.google.com/file/d/1yUHgRFtd-_PSuv_4NaCFqnPfGrx0jAke/view?usp=drive_link into file artifacts/data_ingestion/data.zip]
+[2024-01-24 16:02:57,755: INFO: data_ingestion: Downloaded data from https://drive.google.com/file/d/1yUHgRFtd-_PSuv_4NaCFqnPfGrx0jAke/view?usp=drive_link into file artifacts/data_ingestion/data.zip]
+[2024-01-24 16:03:01,705: INFO: main: >>>>>> stage Data Ingestion stage completed <<<<<<
+
+x==========x]
+[2024-01-24 16:03:01,706: INFO: main: *******************]
+[2024-01-24 16:03:01,706: INFO: main: >>>>>> stage Prepare base model started <<<<<<]
+[2024-01-24 16:03:01,711: INFO: common: yaml file: config/config.yaml loaded successfully]
+[2024-01-24 16:03:01,715: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-01-24 16:03:01,716: INFO: common: created directory at: artifacts]
+[2024-01-24 16:03:01,716: INFO: common: created directory at: artifacts/prepare_base_model]
+[2024-01-24 16:03:03,411: WARNING: saving_utils: Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.]
+[2024-01-24 16:03:04,395: INFO: main: >>>>>> stage Prepare base model completed <<<<<<
+
+x==========x]
+[2024-01-24 16:03:04,396: INFO: main: *******************]
+[2024-01-24 16:03:04,396: INFO: main: >>>>>> stage Training started <<<<<<]
+[2024-01-24 16:03:04,400: INFO: common: yaml file: config/config.yaml loaded successfully]
+[2024-01-24 16:03:04,406: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-01-24 16:03:04,407: INFO: common: created directory at: artifacts]
+[2024-01-24 16:03:04,407: INFO: common: created directory at: artifacts/training]
+[2024-01-24 16:08:05,598: INFO: main: >>>>>> stage Training completed <<<<<<
+
+x==========x]
+[2024-01-24 16:08:05,599: INFO: main: *******************]
+[2024-01-24 16:08:05,599: INFO: main: >>>>>> stage Evaluation stage started <<<<<<]
+[2024-01-24 16:08:05,603: INFO: common: yaml file: config/config.yaml loaded successfully]
+[2024-01-24 16:08:05,606: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-01-24 16:08:05,607: INFO: common: created directory at: artifacts]
+[2024-01-24 16:08:16,376: INFO: common: json file saved at: scores.json]
+[2024-01-24 16:08:16,379: INFO: common: json file saved at: scores.json]
+[2024-01-24 16:08:16,380: INFO: main: >>>>>> stage Evaluation stage completed <<<<<<
+
+x==========x]
